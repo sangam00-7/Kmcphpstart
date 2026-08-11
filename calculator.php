@@ -55,6 +55,7 @@
          echo"<br>";
          echo"<br>";
         echo$result;
+        echo"<br>";
     
     }
     ?>
