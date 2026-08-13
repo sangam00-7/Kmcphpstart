@@ -46,4 +46,5 @@ echo $calc1->getResult();
 $calc1->reset();
 $calc1->add(10)->subtract(7)->multiply(4);
 echo "<br>" . $calc1->getResult();
+
 ?>
