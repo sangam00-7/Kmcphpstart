@@ -38,12 +38,12 @@ class Calculator{
 }
 
 $calc1 = new Calculator();
-$calc1->add(10);
+$calc1->add(20);
 $calc1->subtract(5);
 $calc1->multiply(4);
 echo $calc1->getResult();
 
 $calc1->reset();
-$calc1->add(10)->subtract(5)->multiply(4);
+$calc1->add(10)->subtract(7)->multiply(4);
 echo "<br>" . $calc1->getResult();
 ?>
