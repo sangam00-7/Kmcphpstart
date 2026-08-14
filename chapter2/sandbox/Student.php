@@ -16,9 +16,12 @@ class Student
     public function __construct(string $name, string $email)
     {
         $this->id = self::$nextId++;
+
         $this->setName($name);
         $this->setEmail($email);
+
         $this->enrolledAt = date('Y-m-d');
+
         self::$totalStudents++;
     }
 
@@ -35,7 +38,7 @@ class Student
     public function setName(string $name): bool
     {
         if (strlen($name) < 3 || strlen($name) > 30) {
-            echo "The name should be between 3 and 30 characters";
+            echo "The name should be between 3 and 30 characters.<br>";
             return false;
         }
 
@@ -46,7 +49,7 @@ class Student
     public function setEmail(string $email): bool
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo "The email address is not valid";
+            echo "The email address is not valid.<br>";
             return false;
         }
 
@@ -57,12 +60,40 @@ class Student
     public function addMarks(string $subject, int $score): bool
     {
         if ($score < 0 || $score > 100) {
-            echo "The score should be between 0 to 100";
+            echo "The score should be between 0 to 100.<br>";
             return false;
         }
 
         $this->marks[$subject] = $score;
         return true;
+    }
+
+    public function getAverage(): float
+    {
+        if (empty($this->marks)) {
+            return 0;
+        }
+
+        return array_sum($this->marks) / count($this->marks);
+    }
+
+    public function getGrade(): string
+    {
+        $average = $this->getAverage();
+
+        if ($average >= 70) {
+            return "B+";
+        }
+
+        if ($average >= 60) {
+            return "B";
+        }
+
+        if ($average >= 50) {
+            return "C";
+        }
+
+        return "F";
     }
 
     public function displayReport(): void
@@ -72,6 +103,12 @@ class Student
         echo "<p>Email: {$this->email}</p>";
         echo "<p>Enrolled At: {$this->enrolledAt}</p>";
 
+        echo "<p>Average: " .
+            number_format($this->getAverage(), 2) .
+            "</p>";
+
+        echo "<p>Grade: {$this->getGrade()}</p>";
+
         echo "<h4>Marks:</h4>";
 
         foreach ($this->marks as $subject => $score) {
@@ -80,11 +117,10 @@ class Student
     }
 }
 
-$student1 = new Student("Doe", "John@demo.com");
-
+$student1 = new Student("John Doe", "John@demo.com");
 $student1->addMarks("English", 85);
 $student1->addMarks("Math", 90);
 $student1->addMarks("Science", 88);
-
+$student1->addMarks("History", 92);
 $student1->displayReport();
 ?>
