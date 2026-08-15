@@ -11,7 +11,7 @@ require_once __DIR__ . '/../src/Models/User.php';
 </head>
 <body>
     <?php
-    $user1 = new User("Sandip", "sandipdong@example.com", "paword123");
+    $user1 = new User("Sandip", "sandipdongxom@gmail.com", "Sandip@123");
     $user1->displayUser();
     ?>
 </body>
