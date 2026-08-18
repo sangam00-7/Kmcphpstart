@@ -15,8 +15,17 @@ use App\Models\User;
 </head>
 <body>
     <?php
-    $user1 = new App\Models\User("Dinesh", "dineshdong@example.com", "paword123");
-    $user1->displayUser();
+    $localhost = new App\Core\Database();
+    $pdo = $localhost->getConnection();
+
+    $sql_query = "SELECT * FROM users";
+    $stmt = $pdo->prepare($sql_query);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    print_r($results);
+   // echo "<br>";
+    //$user1 = new App\Models\User("Dinesh", "dineshdong@example.com", "paword123");
+    //$user1->displayUser();
     ?>
 </body>
 </html>
