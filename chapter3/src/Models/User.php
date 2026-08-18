@@ -1,6 +1,9 @@
 <?php
-class  user{
-    private int $id;
+
+namespace App\Models;
+
+class  User{
+private int $id;
 private string $username;
 private string $email;
 private string $createdAt;
