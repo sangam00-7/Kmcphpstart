@@ -11,10 +11,10 @@ class Database{
 
   private function __construct()
   {
-    $dsn = "mysql:host=db;port=3306;dbname=php_workshop;charset=utf8mb4";
+    $dsn = "mysql:host=localhost;port=3306;dbname=php_workshop;charset=utf8mb4";
 
     try {
-      $this->connection = new PDO($dsn, 'root', 'root');
+      $this->connection = new PDO($dsn, 'root', '');
     } catch (PDOException $e) {
       die("Database connection failed: " . $e->getMessage());
     }

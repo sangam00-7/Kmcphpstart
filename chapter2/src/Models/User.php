@@ -1,9 +1,5 @@
 <?php
 
-namespace App\Models;
-
-use App\Core\Database;
-
 class User{
   private int $id;
   private string $username;
@@ -53,20 +49,6 @@ class User{
     }
     $this->password = password_hash($password, PASSWORD_DEFAULT);
     return true;
-  }
-
-
-  public static function create(string $username, string $email, string $password): int|false{
-    $pdo = Database::getInstance()->getConnection();
-    $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
-    $result = $stmt->execute([
-      'username' => trim(strtolower($username)),
-      'email' => trim(strtolower($email)),
-      'password' => password_hash($password, PASSWORD_DEFAULT)
-    ]);
-    
-    return $result ? (int) $pdo->lastInsertId() : false;
-
   }
 
   public function displayUser(): void{

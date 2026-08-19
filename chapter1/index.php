@@ -1,38 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
+  <div>
+    <?php
+      
+      
+      // echo "Hello World";
 
-    <form action="Process.php" method="POST">
+      // int a = 5;
+      // int b = 10;
+      // c = a + b;
+      // printf("%d", c);
 
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
-        </div>
+      $a = 5;
+      $b = 10;
 
-        <br>
+      $c = $a + $b;
 
-        <div>
-            <label for="email">Login Email:</label>
-            <input type="email" id="email" name="email">
-        </div>
+      echo "<br>";
+      echo $c;
 
-        <br>
+      $a = "Something";
 
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-        </div>
+      echo "<br>";
+      echo $a;
 
-        <br>
+      // String concatenation
 
-        <button type="submit">Login</button>
+      $firstName = "John";
+      $lastName = "Doe";
+      echo "<br>";
 
-    </form>
+      echo "The person is " . $firstName . " " . $lastName;
 
+      echo "<br>";
+
+      echo "The person is $firstName $lastName";
+
+      echo "<br>";
+
+      echo 'The person is $firstName $lastName';
+
+      # This is a comment
+
+
+      /**
+       * This is a 
+       * multiline comment
+      */
+
+
+      // $name = 'John';
+      // echo "<br>";
+      // echo $name;
+
+
+
+      // Some string functions
+
+      $name = "John Doe";
+
+      echo "<br>";
+      echo strlen($name);
+      echo "<br>";
+
+      echo strtoupper($name);
+      echo "<br>";
+      echo strtolower($name);
+
+      $str = "Kailali Multiple Campus";
+      $new_string = str_replace("a", "b", $str);
+      echo "<br>";
+      echo $new_string;
+
+
+    ?>
+  </div>
 </body>
 </html>
