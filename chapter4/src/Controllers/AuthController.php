@@ -46,7 +46,7 @@ class AuthController{
         $user = User::create($this->username, $this->email, $password);
         if ($user){
           $_SESSION['flash_messages']['success'] = "Registration Successful. Please log in.";
-          header("Location: /chapter4/public/login.php");
+          header("Location: ./login.php");
         }
       }
     }
