@@ -1,4 +1,12 @@
 <?php
+if(session_status() == PHP_SESSION_NONE)
+  {
+    session_start();
+    if(!empty($_SESSION['flash_message']))
+      {
+        $message = $_SESSION['flash_message']['success'];
+      }
+  }
 
 require_once __DIR__ . '/../src/Core/Autoloader.php';
 
@@ -15,7 +23,7 @@ $userRegister = $auth->register();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css">
-  <title>Document</title>
+  <title>Register</title>
 </head>
 <body>
   <header class="header">

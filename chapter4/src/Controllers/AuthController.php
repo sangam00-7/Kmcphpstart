@@ -57,4 +57,19 @@ class AuthController{
       "email" => $this->email
     ];
   }
+  public function login(): array{
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+      $this->email = trim($_POST["email"]) ?: "";
+      $password = $_POST["password"];
+
+      if (empty($this->email)||(empty($password))){
+        $this->errors[] = "Email and password should not be empty";
+      } else
+      {
+        $user =User::authenticate($this->email, $password);
+      }
+      }
+
+      
+      
 }
