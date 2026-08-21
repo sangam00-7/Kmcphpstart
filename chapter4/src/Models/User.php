@@ -81,10 +81,9 @@ class User{
     ]);
     
     return $result ? (int) $pdo->lastInsertId() : false;
-
   }
 
-  publci static function findbyID(int $id): ?array{
+  public static function findById(int $id): ?array{
     $pdo = Database::getInstance()->getConnection();
     $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
     $stmt->execute(['id' => $id]);
@@ -99,6 +98,7 @@ class User{
     }
     return null;
   }
+
 
   public function displayUser(): void{
     echo "<p>Username: $this->username</p>";

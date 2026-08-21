@@ -6,7 +6,7 @@
 
 use App\Core\Database;
 use App\Models\User;
-use App\Models\Post;
+  use App\Models\Post;
 ?>
 
 <!DOCTYPE html>

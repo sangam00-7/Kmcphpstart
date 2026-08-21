@@ -1,13 +1,7 @@
 <?php
-if(session_status() == PHP_SESSION_NONE)
-  {
-    session_start();
-    if(!empty($_SESSION['flash_message']))
-      {
-        $message = $_SESSION['flash_message']['success'];
-      }
-  }
-
+if(session_status() == PHP_SESSION_NONE){
+  session_start();
+}
 require_once __DIR__ . '/../src/Core/Autoloader.php';
 
 use App\Controllers\AuthController;
@@ -23,7 +17,7 @@ $userRegister = $auth->register();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css">
-  <title>Register</title>
+  <title>Document</title>
 </head>
 <body>
   <header class="header">
