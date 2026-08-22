@@ -1,12 +1,18 @@
 <?php
-  // require_once __DIR__ . '/../src/Models/User.php';
-  // require_once __DIR__ . '/../src/Models/Post.php';
+if(session_status() == PHP_SESSION_NONE){
+  session_start();
+  if (!empty($_SESSION['flash_messages'])){
+    $messages = $_SESSION['flash_messages']['success'];
+  }
+}
 
-  require_once __DIR__ . '/../src/Core/Autoloader.php';
+require_once __DIR__ . '/../src/Core/Autoloader.php';
 
-use App\Core\Database;
-use App\Models\User;
-  use App\Models\Post;
+use App\Controllers\AuthController;
+
+$auth = new AuthController();
+$authLogin = $auth->login();
+
 ?>
 
 <!DOCTYPE html>
@@ -14,43 +20,58 @@ use App\Models\User;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KMC Buddies</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Login Page</title>
 </head>
 <body>
+  <header class="header">
+    <div class="container header__container">
+      <h1 class="header__title">KMC Buddies</h1>
+      <nav class="nav">
+        <a href="login.php" class="nav__link">Login</a>
+        <a href="register.php" class="nav__link">Register</a>
+      </nav>
+    </div>
+  </header>
 
-<?php
+  <main class="container">
+    <section class="section">
+      <div class="auth-card">
 
-  $user = User::findByEmail('test_445566@demo.com');
-  print_r($user);
+      <?php
+      if (!empty($authLogin['errors'])){
+        echo "<div class='alert alert-error'>";
+        foreach ($authLogin['errors'] as $error) {
+          echo $error . "<br>";
+        }
+        echo "</div>";
+      }
+      ?>
 
-  // $newUserId = User::create('test246', 'test246@demo.com', 'test245');
-  // echo "<br>";
-  // echo $newUserId;
-  // echo "<br>";
+      <?php if (!empty($messages)): ?>
+        <div class="alert alert-success">
+        <?php 
+          echo $messages . "<br>";
+          unset($_SESSION['flash_messages']);
+        ?>
+        </div>
+      <?php endif; ?>
 
-  $db = Database::getInstance();
-  $pdo = $db->getConnection();
-
-  $sql_query = "SELECT * FROM users";
-  $stmt = $pdo->prepare($sql_query);
-  $stmt->execute();
-
-  $result = $stmt->fetchAll();
-  // print_r($result);
-
-
-  // $post1 = new Post("Hello world");
-  // echo $post1->post;
-  // echo "<br>";
-
-  $user1 = new User("johndoe", "johndoe@demo.com", "hello123");
-  $user1->displayUser();
-
-  $user2 = new User("johndoe", "johndoe@demo.com", "hello123");
-  $user2->displayUser();
-
-
-?>
+        <h2 class="section__title">Log In</h2>
+        <form action="" method="post">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="">
+          </div>
+          <input type="submit" value="Login" class="btn btn-primary btn-full">
+        </form>
+      </div>
+    </section>
+  </main>
 
 </body>
 </html>

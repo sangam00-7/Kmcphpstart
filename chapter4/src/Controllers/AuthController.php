@@ -58,29 +58,36 @@ class AuthController{
     ];
   }
 
-  public function login(): array{
-    if ($_SERVER["REQUEST_METHOD"]=="POST"){
+  public function login(): array {
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
       $this->email = trim($_POST['email']) ?: "";
-      $password = $_POST["password"];
+      $password = trim($_POST['password']);
 
-      if (empty($this->email)){
-        $this->errors[] = "Email and password cant't be empty";
-      } else{
+      if ((empty($this->email)) || (empty($password))) {
+        $this->errors[] = "Email and password can't be empty";
+      } else {
         $user = User::authenticate($this->email, $password);
         if ($user){
           session_regenerate_id(true);
           $_SESSION['user_id'] = $user['id'];
           header("Location: ./dashboard.php");
-          exit();
+          exit;
         } else{
-          $this->errors[]="Invalid email or password";
+          $this->errors[] = "Invalid email or password";
         }
       }
     }
-
     return [
-      "errors" => $this->errors,
-      "email" => $this->email
+      'errors' => $this->errors,
+      'email' => $this->email
     ];
   }
+
+  public function logout(): void {
+    $_SESSION = [];
+    header("Location: ./login.php");
+    exit;
+  }
+
+
 }
